@@ -29,6 +29,9 @@ public class RazorAllowanceResolver : DefaultAllowanceResolver
         // string (eg. interpolated or parameter filling) tag can contain punctuation or inlined C# code and braces without tags are ignored by default (DefaultAllowed = false)
         if (tagType.IsOfType(PredefinedClassificationTypeNames.String)) return TagAllowance.Ignore;
 
+        // ignore razor code background highlighting
+        if (tagType.IsOfType("RazorCode")) return TagAllowance.Ignore;
+
         if (General.Instance.XmlTags)
         {
             if (tagType.IsOfType("HTML Tag Delimiter")) return TagAllowance.XmlTag;
@@ -45,6 +48,9 @@ public class RazorAllowanceResolver : DefaultAllowanceResolver
 
         // string (eg. interpolated or parameter filling) tag can contain punctuation or inlined C# code and braces without tags are ignored by default (DefaultAllowed = false)
         if (classification == PredefinedClassificationTypeNames.String) return TagAllowance.Ignore;
+
+        // ignore razor code background highlighting
+        if (classification == "RazorCode") return TagAllowance.Ignore;
 
         if (General.Instance.XmlTags)
         {
